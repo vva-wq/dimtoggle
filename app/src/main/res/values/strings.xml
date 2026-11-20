@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Затемнение</string>
+    <string name="toast_dim">Подсветка: 10%</string>
+    <string name="toast_bright">Подсветка: 100%</string>
+    <string name="toast_failed">Не удалось изменить подсветку</string>
+    <string name="toast_no_permission">Нет разрешения. Выдайте его командой pm grant (см. инструкцию)</string>
+</resources>
