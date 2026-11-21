@@ -3,6 +3,9 @@ package ru.user.dimtoggle;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Process;
 import android.provider.Settings;
 import android.widget.Toast;
 
@@ -20,6 +23,9 @@ public class ToggleActivity extends Activity {
 
     /** Обычное значение. */
     private static final int HIGH = 100;
+
+    /** Через сколько миллисекунд процесс завершается сам (чтобы успела показаться надпись). */
+    private static final long EXIT_DELAY_MS = 2000;
 
     /** Всё, что выше порога, считается «обычной» яркостью, и нажатие затемняет. */
     private static final int THRESHOLD = 30;
@@ -43,5 +49,8 @@ public class ToggleActivity extends Activity {
             Toast.makeText(this, R.string.toast_no_permission, Toast.LENGTH_LONG).show();
         }
         finish();
+        // Завершаем свой процесс, чтобы он не занимал память на ТВ.
+        new Handler(Looper.getMainLooper()).postDelayed(
+                () -> Process.killProcess(Process.myPid()), EXIT_DELAY_MS);
     }
 }
